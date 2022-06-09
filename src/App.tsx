@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Rate from './components/Rate';
+import Thanks from './components/Thanks';
 
-function App() {
+const App = (): JSX.Element => {
+  const [rating, setRating] = useState<number | null>(null);
+  const [submitted, setSubmitted] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='h-full flex items-center justify-center'>
+      {submitted ? (
+        <Thanks rating={rating!} />
+      ) : (
+        <Rate
+          setSubmitted={setSubmitted}
+          setRating={setRating}
+          rating={rating}
+        />
+      )}
     </div>
   );
-}
+};
 
 export default App;
